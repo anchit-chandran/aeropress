@@ -16,7 +16,7 @@
 <body>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-8 border-danger align-content-center ">
+            <div class="col-6 border-danger align-content-center ">
                 <div class="row text-center">
                     <div class="col">
                         <h1>🤎Aeroprecipe</h1>
@@ -29,15 +29,15 @@
                                 <div class="col">
                                     {%csrf_token%}
                                     {% for field in form %}
-                                    <div class="fieldWrapper row justify-content-center">
+                                    <div class="fieldWrapper row justify-content-center align-items-center py-1">
                                         {{field.errors}}
-                                        <div class="col d-flex justify-content-lg-end justify-content-start">
-
+                                        <div class="px-lg-1 col-lg-6 col-12 d-lg-flex justify-content-end">
                                             {{field.label_tag}}
                                         </div>
-                                        <div class="col">
+                                        <div class="col px-lg-0">
                                             {% if field.field.widget.attrs.role == 'switch'%}
-                                            <div class="form-check form-switch">{{field}}</div>
+                                            <div class="d-flex form-check form-switch align-items-center">{{field}}
+                                            </div>
                                             {%else%}
                                             {{field}}
                                             {%endif%}
@@ -48,7 +48,7 @@
                             </div>
                             <div class="row">
                                 <div class="col d-flex justify-content-center">
-                                    <input type='submit' value='Submit'>
+                                    <input type='submit' value='Submit' class='btn btn-sm btn-outline-dark'>
                                 </div>
                             </div>
                         </form>
@@ -58,24 +58,30 @@
         </div>
         <div class="row">
             <div class="col">
-                <h1>Previous recipes</h1>
-
-                {% for recipe in rs %}
-                <div>
-                    <b>{{recipe.datetime_added}}</b>
-                    <ul>
-                        <p>Coffee used: <em>{{recipe.coffee_g}}g</em></p>
-                        <p>Water used: <em>{{recipe.water_brew_ml}}mL</em></p>
-                        <p>Extraction time: <em>{{recipe.brew_time_s}} seconds</em></p>
-                        <p>Milk: <em>{{recipe.milk_ml}}mL</em></p>
-                        <p>Extra water added: <em>{{recipe.extra_water_ml}}mL</em></p>
-                        <p>Experienced nausea: <em>{%if recipe.nausea%}Yes{%else%}No{%endif%}</em></p>
-                        <p>Rating: <em>{{recipe.rating}}/10</em></p>
-                    </ul>
+                <div class="row">
+                    <div class="col"><h1>☕ Previous recipes</h1></div>
                 </div>
-                {% endfor %}
+                <div class="row recipesWrapper justify-content-around">
+                    {% for recipe in rs %}
+                    <div class="col-md-3 col-6 recipeCol">
+                        <p class="p-1"><b>{{recipe.datetime_added}}</b>
+                            used <em>{{recipe.coffee_g}}g</em> coffee,
+                            with <em>{{recipe.water_brew_ml}}mL</em> water and
+                            <em>{{recipe.milk_ml}}mL</em> milk. Extraction time was <em>{{recipe.brew_time_s}}
+                                seconds</em>.
+                            {%if recipe.extra_water_ml%}Diluted with <em></em>{{recipe.extra_water_ml}}mL</em>
+                            water.{%else%}No added water.{%endif%}
+                        </p>
+                        <p class="">
+                            {%if recipe.nausea%}Nausea present.{%else%}No nausea.{%endif%} Rating: <em>{{recipe.rating}}/10</em>.
+                        </p>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
 
 
