@@ -16,9 +16,23 @@
     background-color: rgb(228 208 201);
     border-radius: 28px;
     margin: 1%;
+    transition: box-shadow 0.25s;
 }
 
 .recipeCol:hover {
     background-color: rgb(238, 164, 138);
     box-shadow: 5px 10px #888888;
 }
+
+label {
+    text-align: end;
+}
+
+.prevRecipeHeaderCol,
+.prevRecipeHeaderCol>h1  {
+    width :fit-content;
+}
+
+/* .dateAddedHeaderCol {
+    width: fit-content;
+} */
